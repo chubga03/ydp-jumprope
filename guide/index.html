@@ -1,4 +1,18 @@
-<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex"><title>제13회 영등포구 줄넘기대회 안내</title><style>:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style></head><body>
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex"><title>제13회 영등포구 줄넘기대회 안내</title><style>:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif}img{max-width:100%}[hidden]{display:none!important}
+/* 신청하기 */
+.apply{position:relative;z-index:3;margin-top:-14px;background:#0D1A4A;color:#fff;border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:10px;box-shadow:0 6px 0 rgba(13,26,74,.12)}
+.apply .ah{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap}
+.apply h3{margin:0;font-family:var(--f-disp);font-weight:400;font-size:22px}
+.apply .left{font-weight:900;font-size:13px;color:#0D1A4A;background:#FFD23F;border-radius:99px;padding:3px 10px}
+.apply p{margin:0;font-size:14px;line-height:1.5;color:#D6DCF5}
+.apply p b{color:#FFD23F}
+.apply a.btn{display:flex;justify-content:center;align-items:center;gap:8px;background:#FFD23F;color:#0D1A4A;text-decoration:none;font-weight:900;font-size:18px;border-radius:12px;padding:13px 0}
+.apply a.btn:focus-visible{outline:3px solid #fff;outline-offset:2px}
+.apply small{font-size:12.5px;color:#AEB8E0;line-height:1.5}
+.apply.closed a.btn{display:none}
+.apply + .pick{margin-top:12px}
+.jump a.ap{background:#FFD23F}
+</style></head><body>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -129,10 +143,18 @@ html{scroll-behavior:smooth}
       <h1>영등포구<br>줄넘기<span>대회</span></h1>
       <div class="when"><b>2026년 11월 14일(토)</b><br>09:00 ~ 12:50 · 영등포다목적배드민턴체육관 2층</div>
       <nav class="jump" aria-label="바로 가기">
-        <a href="#schedule">진행 일정</a><a href="#awards">시상 기준</a><a href="#rules">경기 규정</a><a href="#notice">꼭 지켜 주세요</a>
+        <a class="ap" href="#apply">신청하기</a><a href="#schedule">진행 일정</a><a href="#awards">시상 기준</a><a href="#rules">경기 규정</a><a href="#notice">꼭 지켜 주세요</a>
       </nav>
     </div>
   </header>
+
+  <div class="apply" id="apply">
+    <div class="ah"><h3>대회 신청하기</h3><span class="left" id="applyLeft">선착순 300명</span></div>
+    <p id="applyWhen">접수 <b>10.19(월) ~ 11.6(금) 20:00</b> · 정원이 차면 조기 마감될 수 있어요.</p>
+    <a class="btn" href="https://m.site.naver.com/2iOB3" target="_blank" rel="noopener">네이버 신청서 작성하기 →</a>
+    <small>신청 → 확정 안내 문자 → 문자를 받은 뒤 3일 안에 참가비 입금(참가 선수 이름으로). 한 명당 개인전 1 + 2인전 1종목까지.</small>
+  </div>
+
 
   <div class="pick">
     <h3>우리 아이 부문 고르기</h3>
@@ -249,4 +271,17 @@ html{scroll-behavior:smooth}
 })();
 </script>
 
+
+<script>
+(function(){ // 접수 마감(2026-11-06 20:00 KST)이 지나면 신청 버튼을 숨기고 마감 안내로
+  var end=new Date("2026-11-06T20:00:00+09:00"), box=document.getElementById("apply");
+  if(!box) return;
+  var now=new Date();
+  if(now>=end){ box.classList.add("closed"); document.getElementById("applyLeft").textContent="접수 마감";
+    document.getElementById("applyWhen").innerHTML="접수가 마감됐어요. 확정 안내 문자를 받은 분만 참가할 수 있어요.";
+    var j=document.querySelector('.jump a.ap'); if(j) j.remove(); return; }
+  var d=Math.ceil((end-now)/86400000);
+  if(d<=7) document.getElementById("applyLeft").textContent = d<=1 ? "오늘 20:00 마감" : "마감까지 "+d+"일";
+})();
+</script>
 </body></html>
